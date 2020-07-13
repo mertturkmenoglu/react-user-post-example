@@ -1,24 +1,21 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import UserPost from './components/UserPost';
 
-function App() {
+const App = () => {
+  const post = {
+    comments: [],
+    username: 'mertturkmenoglu',
+    userImage: 'https://github.com/mertturkmenoglu.png',
+    date: new Date().toLocaleDateString(),
+    imageUrl: 'https://upload.wikimedia.org/wikipedia/commons/2/22/Skyline-New-York-City.jpg',
+    content: 'Post Description: Empire State Building. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam in eleifend lectus, quis commodo nibh. Nunc id condimentum dolor. Praesent tempor rutrum elit pulvinar lobortis. Cras elementum ac nibh ut.',
+    likeCount: 5,
+    liked: true
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div >
+      <UserPost post={post} />
     </div>
   );
 }
