@@ -7,6 +7,7 @@ import MoreVertIcon from '@material-ui/icons/MoreVert';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import CommentsIcon from '@material-ui/icons/Message';
 import { makeStyles } from '@material-ui/core/styles';
+import NewCommentDialog from './NewCommentDialog';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -26,9 +27,9 @@ const UserPost = (props) => {
 	const [liked, setLiked] = useState(post.liked);
 	const [favCount, setFavCount] = useState(post.likeCount);
 	const [comments, setComments] = useState(post.comments);
+	const [commentDialogStatus, setCommentDialogStatus] = useState(false);
 
 	const favClickHandler = e => {
-		console.log(`Post like status was ${liked} but now will be ${!liked}`);
 		if (liked) {
 			setFavCount(favCount - 1);
 		} else {
@@ -40,7 +41,16 @@ const UserPost = (props) => {
 
 	const commentsClickHandler = e => {
 		console.log('Comments clicked');
-		setComments([...comments, 'Test Comment']);
+		setCommentDialogStatus(true);
+	}
+
+	const dialogCloseCallback = () => {
+		setCommentDialogStatus(false);
+	}
+
+	const newCommentCallback = (comment) => {
+		setComments([...comments, comment]);
+		setCommentDialogStatus(false);
 	}
 
 	return (
@@ -85,6 +95,11 @@ const UserPost = (props) => {
 					</Typography>
 				</CardContent>
 			</Card >
+			<NewCommentDialog
+				commentCallback={newCommentCallback}
+				closeCallback={dialogCloseCallback}
+				openStatus={commentDialogStatus}
+			/>
 		</Container>
 	);
 }
